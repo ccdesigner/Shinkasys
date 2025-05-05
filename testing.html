@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shinka Systems | Testing Page</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a2e4a;
+            margin-bottom: 1.5rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+        .note {
+            background-color: #fff9e6;
+            padding: 1rem;
+            border-left: 4px solid #ffbe0b;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shinka Systems - Testing Environment</h1>
+        
+        <div class="note">
+            <p>This is a private testing page for internal use only. Please do not share this link.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Chat Widget Test</h2>
+            <p>This section tests the customer support chat functionality.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Placeholder Content</h2>
+            <p>This is sample content for testing purposes. It simulates various page elements without connecting to actual systems.</p>
+            <ul>
+                <li>Test item 1</li>
+                <li>Test item 2</li>
+                <li>Test item 3</li>
+            </ul>
+        </div>
+        
+        <div class="test-section">
+            <h2>Test Data</h2>
+            <p>Sample data for verification:</p>
+            <p><strong>Current Date:</strong> <span id="currentDate"></span></p>
+            <p><strong>User Agent:</strong> <span id="userAgent"></span></p>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+        
+        createChat({
+            webhookUrl: 'https://yoyo6022.app.n8n.cloud/webhook/9b4cc415-5dc1-4e75-b833-be6b87212fb6/chat',
+            initialMessages: [
+                'Hi there! 👋',
+                'This is the testing environment chat. How can I assist you today?'
+            ],
+        });
+        
+        // Display test data
+        document.getElementById('currentDate').textContent = new Date().toLocaleString();
+        document.getElementById('userAgent').textContent = navigator.userAgent;
+    </script>
+</body>
+</html>
