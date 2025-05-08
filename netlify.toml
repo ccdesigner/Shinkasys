@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "http://shinkasystems.com/*"
+  to = "https://shinkasystems.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.shinkasystems.com/*"
+  to = "https://www.shinkasystems.com/:splat"
+  status = 301
+  force = true
