@@ -1036,7 +1036,7 @@
                 </div>
                 <div class="contact-text">
                     <h4>Email Us</h4>
-                    <p>hello@shinkasystems.com</p>
+                    <p>Tech@ShinkaSystems.com</p>
                 </div>
             </div>
             <div class="contact-method">
@@ -1060,52 +1060,75 @@
         </div>
         
         <div class="contact-form">
-            <!-- Tab Navigation -->
-            <div class="form-tabs" style="display: flex; margin-bottom: 2rem; border-bottom: 1px solid #eee;">
-                <button class="tab-button active" data-tab="message-form" style="flex: 1; padding: 1rem; background: none; border: none; border-bottom: 3px solid var(--accent); font-weight: 600; cursor: pointer;">
-                    Send Message
-                </button>
-                <!--  <button class="tab-button" data-tab="booking-form" style="flex: 1; padding: 1rem; background: none; border: none; font-weight: 600; cursor: pointer;">
-                    Book Meeting
-                </button> -->
-            </div>
-            
-            <!-- Message Form, waiting on reg for db side type -->
-            <form id="messageForm" class="form-tab active" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                <div class="honeypot">
-                    <label>Leave this empty: <input type="text" name="_gotcha"></label>
-                </div>
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="service">Service Interest</label>
-                    <select id="service" name="service" required>
-                      <option value="">What can we help with?</option>
-                      <option value="development">Business software</option>
-                      <option value="data">Data & reports</option>
-                      <option value="cloud">Cloud systems</option>
-                      <option value="ai">AI tools</option>
-                      <option value="security">Security</option>
-                      <option value="strategy">Tech planning</option>
-                      <option value="ecommerce">Online stores</option>
-                      <option value="support">Tech support</option>
-                      <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                    <label for="message">Project Details</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">
-                    Send Message <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
+		  <!-- Tab Navigation -->
+		  <div class="form-tabs" style="display: flex; margin-bottom: 2rem; border-bottom: 1px solid #eee;">
+			<button class="tab-button active" data-tab="message-form" style="flex: 1; padding: 1rem; background: none; border: none; border-bottom: 3px solid var(--accent); font-weight: 600; cursor: pointer;">
+			  Send Message
+			</button>
+			<button class="tab-button" data-tab="booking-form" style="flex: 1; padding: 1rem; background: none; border: none; font-weight: 600; cursor: pointer;">
+			  Book Meeting
+			</button>
+		  </div>
+		  
+		  <!-- Message Form with Netlify + Popup -->
+		  <form 
+			id="messageForm" 
+			class="form-tab active" 
+			name="contact" 
+			method="POST" 
+			data-netlify="true"
+			netlify-honeypot="bot-field">
+			<!-- Netlify Bot Detection -->
+			<div class="honeypot" style="display: none;">
+			  <label>Don't fill this out if you're human: <input name="bot-field"></label>
+			</div>
+			
+			<!-- Form Fields -->
+			<div class="form-group">
+			  <label for="name">Your Name</label>
+			  <input type="text" id="name" name="name" required>
+			</div>
+			<div class="form-group">
+			  <label for="email">Email Address</label>
+			  <input type="email" id="email" name="email" required>
+			</div>
+			<div class="form-group">
+			  <label for="service">Service Interest</label>
+			  <select id="service" name="service" required>
+				<option value="">What can we help with?</option>
+				<option value="development">Business software</option>
+				<option value="data">Data & reports</option>
+				<option value="cloud">Cloud systems</option>
+				<option value="ai">AI tools</option>
+				<option value="security">Security</option>
+				<option value="strategy">Tech planning</option>
+				<option value="ecommerce">Online stores</option>
+				<option value="support">Tech support</option>
+				<option value="other">Other</option>
+			  </select>
+			</div>
+			<div class="form-group">
+			  <label for="message">Project Details</label>
+			  <textarea id="message" name="message" required></textarea>
+			</div>
+			
+			<input type="hidden" name="form-name" value="contact">
+			
+			<button type="submit" class="submit-btn">
+			  Send Message <i class="fas fa-paper-plane"></i>
+			</button>
+		  </form>
+		</div>
+
+		<!-- Success Popup (hidden by default) -->
+		<div id="successPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); z-index: 1000; border-radius: 8px;">
+		  <h3>Thank you!</h3>
+		  <p>Your message has been sent successfully.</p>
+		  <button onclick="closePopup()" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+		</div>
+
+		<!-- Overlay (hidden by default) -->
+		<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
             
             <!-- Booking Form - Using Calendly inline widget -->
             <!--  <div id="bookingForm" class="form-tab" style="display: none; height: 600px;">
@@ -1282,6 +1305,34 @@ function initForms() {
             this.reset();
         });
     }
+	
+	// Handle form submission
+	  document.getElementById("messageForm").addEventListener("submit", function(e) {
+		e.preventDefault();
+		
+		// Submit to Netlify
+		fetch("/", {
+		  method: "POST",
+		  body: new FormData(this)
+		})
+		.then(response => {
+		  if (response.ok) {
+			// Show success popup
+			document.getElementById("successPopup").style.display = "block";
+			document.getElementById("overlay").style.display = "block";
+			// Reset form
+			this.reset();
+		  }
+		})
+		.catch(error => {
+		  alert("There was an error sending your message. Please try again.");
+		});
+	  });
+
+	  function closePopup() {
+		document.getElementById("successPopup").style.display = "none";
+		document.getElementById("overlay").style.display = "none";
+	  }
 
     // Message Form with Fetch API - Commented out for later implementation
     /*
@@ -1325,5 +1376,6 @@ function initForms() {
     */
 }
 </script>
+
 </body>
 </html>
