@@ -5,779 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shinka Systems | Premium Business Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #1a2e4a;
-            --secondary: #3a86ff;
-            --accent: #ffbe0b;
-            --dark: #0d1b2a;
-            --light: #f8f9fa;
-            --success: #4cc9f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-        }
-
-        /* Animated Gradient Background */
-        .gradient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #1a2e4a, #3a86ff, #8338ec, #ff006e);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            z-index: -2;
-            opacity: 0.08;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Glass Morphism Navigation */
-        nav {
-            position: fixed;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.88);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            position: relative;
-            transition: all 0.3s ease;
-            font-size: 1.05rem;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            bottom: -6px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section with Floating Elements */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
-            margin-bottom: 1.8rem;
-            line-height: 1.15;
-            font-weight: 800;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2.5rem;
-            background: var(--accent);
-            color: var(--dark);
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            box-shadow: 0 4px 20px rgba(255, 190, 11, 0.35);
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 190, 11, 0.5);
-        }
-
-        .cta-button i {
-            transition: transform 0.3s;
-        }
-
-        .cta-button:hover i {
-            transform: translateX(3px);
-        }
-
-        /* Floating Shapes Animation */
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            z-index: 1;
-        }
-
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--accent);
-            top: 15%;
-            right: 10%;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            bottom: 10%;
-            left: 15%;
-            animation: float 10s ease-in-out infinite 1s;
-        }
-
-        .shape-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--success);
-            top: 60%;
-            right: 25%;
-            animation: float 7s ease-in-out infinite 0.5s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(10px, -15px) rotate(3deg); }
-            66% { transform: translate(-10px, 10px) rotate(-3deg); }
-        }
-
-        /* Particle Background */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            animation: float-particle linear infinite;
-        }
-
-        @keyframes float-particle {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
-        }
-
-        /* Services Section with Card Hover Effects */
-        .services {
-            padding: 8rem 5%;
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 5rem;
-            font-size: 2.8rem;
-            font-weight: 800;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--secondary));
-            border-radius: 2px;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(58, 134, 255, 0.03), rgba(255, 190, 11, 0.03));
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
-            border-color: rgba(58, 134, 255, 0.15);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 2rem;
-            color: var(--secondary);
-            transition: transform 0.4s, color 0.4s;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.1);
-            color: var(--accent);
-        }
-
-        .service-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .service-card p {
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 2rem;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-item {
-            background: rgba(58, 134, 255, 0.1);
-            color: var(--secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Skills/Technologies Section */
-        .technologies {
-            padding: 8rem 5%;
-            background: var(--light);
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 3rem auto 0;
-        }
-
-        .tech-category {
-            background: white;
-            border-radius: 15px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .tech-category h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .tech-category h3 i {
-            color: var(--accent);
-        }
-
-        .tech-list {
-            list-style: none;
-        }
-
-        .tech-list li {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            position: relative;
-            padding-left: 1.8rem;
-        }
-
-        .tech-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            width: 8px;
-            height: 8px;
-            background: var(--secondary);
-            border-radius: 50%;
-        }
-
-        /* Testimonials Carousel */
-        .testimonials {
-            padding: 8rem 5%;
-            background: white;
-            position: relative;
-        }
-
-        .testimonial-carousel {
-            max-width: 1000px;
-            margin: 4rem auto 0;
-            position: relative;
-        }
-
-        .testimonial-slides {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            gap: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        .testimonial-slides::-webkit-scrollbar {
-            display: none;
-        }
-
-        .testimonial-card {
-            min-width: 100%;
-            scroll-snap-align: start;
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
-            position: relative;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 2rem;
-            font-size: 6rem;
-            color: rgba(58, 134, 255, 0.1);
-            font-family: serif;
-            line-height: 1;
-        }
-
-        .testimonial-content {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #333;
-            margin-bottom: 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-        }
-
-        .author-info h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .author-info p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .carousel-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .carousel-dot.active {
-            background: var(--secondary);
-            transform: scale(1.2);
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 6rem 5%;
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, var(--accent), var(--success));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 8rem 5%;
-            background: var(--light);
-        }
-
-        .contact-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .contact-info {
-            background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: white;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-info h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-method {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .contact-text h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-text p {
-            opacity: 0.8;
-        }
-
-        .contact-form {
-            padding: 4rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-            color: #444;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 1.2rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-        }
-
-        .submit-btn:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
-        }
-
-        .honeypot {
-            position: absolute;
-            left: -9999px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 5% 2rem;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            display: inline-block;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            color: var(--dark);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 2rem;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1024px) {
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-info {
-                padding: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 0 5%;
-                text-align: center;
-            }
-
-            .hero-content {
-                max-width: 100%;
-            }
-
-            .floating-shape {
-                display: none;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .service-card {
-                padding: 2.5rem 2rem;
-            }
-
-            .testimonial-card {
-                padding: 2.5rem;
-            }
-
-            .contact-form,
-            .contact-info {
-                padding: 2.5rem;
-            }
-        }
-    
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="gradient-bg"></div>
@@ -792,7 +20,6 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
-            <a href="#technologies">Technologies</a>
             <a href="#testimonials">Success Stories</a>
             <a href="#contact">Contact</a>
         </div>
@@ -817,214 +44,214 @@
         <div class="floating-shape shape-3"></div>
     </section>
 
- <!-- Services Section -->
-<section id="services" class="services">
-    <h2 class="section-title">Work Smarter, Not Harder</h2>
-<p style="text-align: center; max-width: 700px; margin: 0 auto 4rem; font-size: 1.2rem; color: #555;">
-    Modern tools to boost productivity—no tech skills required. Just tell us what slows you down.
-</p>
-    
-    <div class="services-grid">
-        <!-- 1. Custom Software -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-laptop-code"></i>
-            </div>
-            <h3>Custom Software for Your Needs</h3>
-            <p>Tailored apps and tools that work exactly how you need them—no more clunky workarounds.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Web/Mobile Apps</span>
-                <span class="tech-item">Workflow Automation</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 2. Data Insights -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-chart-line"></i>
-            </div>
-            <h3>Smarter Data for Better Decisions</h3>
-            <p>Turn spreadsheets into clear dashboards and predictions—so you know what’s working.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Dashboards</span>
-                <span class="tech-item">Trend Forecasting</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 3. Cloud Solutions -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-cloud"></i>
-            </div>
-            <h3>Cloud Solutions That Scale</h3>
-            <p>Secure, flexible systems that grow with your business—no IT headaches.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Secure Storage</span>
-                <span class="tech-item">Remote Access</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 4. AI & Automation -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-robot"></i>
-            </div>
-            <h3>AI & Automation to Save Time</h3>
-            <p>Let technology handle repetitive tasks—freeing your team for important work.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Chatbots</span>
-                <span class="tech-item">Smart Workflows</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 5. Security -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-shield-alt"></i>
-            </div>
-            <h3>Security & Reliability</h3>
-            <p>Protect your business with backups, monitoring, and hacker prevention.</p>
-            <div class="tech-stack">
-                <span class="tech-item">24/7 Monitoring</span>
-                <span class="tech-item">Data Backups</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 6. Tech Strategy -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-chess"></i>
-            </div>
-            <h3>Tech Strategy & Planning</h3>
-            <p>A roadmap to upgrade your tech—without wasting time or money.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Audits</span>
-                <span class="tech-item">Training</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 7. E-Commerce -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-            <h3>E-Commerce & Online Sales</h3>
-            <p>Seamless online stores that convert visitors into customers.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Payment Integration</span>
-                <span class="tech-item">Inventory Tools</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-
-        <!-- 8. Support -->
-        <div class="service-card">
-            <div class="service-icon">
-                <i class="fas fa-headset"></i>
-            </div>
-            <h3>Support & Maintenance</h3>
-            <p>Ongoing help so your tech never holds you back.</p>
-            <div class="tech-stack">
-                <span class="tech-item">Quick Fixes</span>
-                <span class="tech-item">Updates</span>
-            </div>
-            <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
-                Learn More <i class="fas fa-chevron-right"></i>
-            </a>
-        </div>
-    </div>
-</section>
-    
-<!-- Testimonials Section -->
-<section id="testimonials" class="testimonials">
-    <h2 class="section-title">Client Success Stories</h2>
-    <div class="testimonial-carousel">
-        <div class="testimonial-slides">
-            
-            <div class="testimonial-card">
-                <p class="testimonial-content">"Shinka Systems built a GenAI tool that completely transformed our pet adoption process. Where we once struggled with basic text-only profiles, we now generate warm, personalized descriptions instantly. The system understands how to translate shelter notes into compelling narratives that help our animals connect with potential adopters while keeping all our data organized."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar" style="background-color: #FFBE0B; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-paw" style="font-size: 1.8rem; color: #1A2E4A;"></i>
-                    </div>
-                    <div class="author-info">
-                        <h4>Animal Shelter Team</h4>
-                        <p>Local Animal Welfare Organization</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Work Smarter, Not Harder</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 4rem; font-size: 1.2rem; color: #555;">
+            Modern tools to boost productivity—no tech skills required. Just tell us what slows you down.
+        </p>
         
-            <div class="testimonial-card">
-                <p class="testimonial-content">"Before working with Shinka, our team was spending hours manually verifying SEC filing codes. Their solution not only automated the validation process but connected directly to the SEC systems to auto-correct issues. The accuracy and time savings have been remarkable - this is exactly what we needed but didn't know was possible."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar" style="background-color: #1A2E4A; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-file-invoice-dollar" style="font-size: 1.8rem; color: white;"></i>
-                    </div>
-                    <div class="author-info">
-                        <h4>Daniel Glithum</h4>
-                    </div>
+        <div class="services-grid">
+            <!-- 1. Custom Software -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
                 </div>
+                <h3>Custom Software for Your Needs</h3>
+                <p>Tailored apps and tools that work exactly how you need them—no more clunky workarounds.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Web/Mobile Apps</span>
+                    <span class="tech-item">Workflow Automation</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
             </div>
 
-            <div class="testimonial-card">
-                <p class="testimonial-content">"Shinka manages our entire global server infrastructure with exceptional reliability. Their on-call team provides remarkably fast response times - most updates and fixes are completed within hours, even for our international offices. What impressed us most was how seamlessly they took over operations without any disruption to our users worldwide."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar" style="background-color: #3A86FF; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-server" style="font-size: 1.8rem; color: white;"></i>
-                    </div>
-                    <div class="author-info">
-                        <h4>Charlie Adnara</h4>
+            <!-- 2. Data Insights -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Smarter Data for Better Decisions</h3>
+                <p>Turn spreadsheets into clear dashboards and predictions—so you know what's working.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Dashboards</span>
+                    <span class="tech-item">Trend Forecasting</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 3. Cloud Solutions -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud Solutions That Scale</h3>
+                <p>Secure, flexible systems that grow with your business—no IT headaches.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Secure Storage</span>
+                    <span class="tech-item">Remote Access</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 4. AI & Automation -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>AI & Automation to Save Time</h3>
+                <p>Let technology handle repetitive tasks—freeing your team for important work.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Chatbots</span>
+                    <span class="tech-item">Smart Workflows</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 5. Security -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Security & Reliability</h3>
+                <p>Protect your business with backups, monitoring, and hacker prevention.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">24/7 Monitoring</span>
+                    <span class="tech-item">Data Backups</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 6. Tech Strategy -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chess"></i>
+                </div>
+                <h3>Tech Strategy & Planning</h3>
+                <p>A roadmap to upgrade your tech—without wasting time or money.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Audits</span>
+                    <span class="tech-item">Training</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 7. E-Commerce -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>E-Commerce & Online Sales</h3>
+                <p>Seamless online stores that convert visitors into customers.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Payment Integration</span>
+                    <span class="tech-item">Inventory Tools</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+
+            <!-- 8. Support -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Support & Maintenance</h3>
+                <p>Ongoing help so your tech never holds you back.</p>
+                <div class="tech-stack">
+                    <span class="tech-item">Quick Fixes</span>
+                    <span class="tech-item">Updates</span>
+                </div>
+                <a href="#contact" class="cta-button" style="margin-top: 1.5rem; padding: 0.8rem 1.8rem; font-size: 1rem;">
+                    Learn More <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title">Client Success Stories</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-slides">
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Shinka Systems built a GenAI tool that completely transformed our pet adoption process. Where we once struggled with basic text-only profiles, we now generate warm, personalized descriptions instantly. The system understands how to translate shelter notes into compelling narratives that help our animals connect with potential adopters while keeping all our data organized."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: #FFBE0B; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-paw" style="font-size: 1.8rem; color: #1A2E4A;"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Animal Shelter Team</h4>
+                            <p>Local Animal Welfare Organization</p>
+                        </div>
                     </div>
                 </div>
-            </div>
             
-            <div class="testimonial-card">
-                <p class="testimonial-content">"Our manual membership tracking process was error-prone until Shinka implemented their automated solution. By connecting our forms with PayPal's API and building tracking dashboards, they turned a multi-day administrative burden into a process that completes itself with perfect accuracy, giving us real-time visibility into membership status."</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar" style="background-color: #3A86FF; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-hands-helping" style="font-size: 1.8rem; color: white;"></i>
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Before working with Shinka, our team was spending hours manually verifying SEC filing codes. Their solution not only automated the validation process but connected directly to the SEC systems to auto-correct issues. The accuracy and time savings have been remarkable - this is exactly what we needed but didn't know was possible."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: #1A2E4A; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-file-invoice-dollar" style="font-size: 1.8rem; color: white;"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Daniel Glithum</h4>
+                        </div>
                     </div>
-                    <div class="author-info">
-                        <h4>Administration Team</h4>
-                        <p>Community Non-Profit Organization</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Shinka manages our entire global server infrastructure with exceptional reliability. Their on-call team provides remarkably fast response times - most updates and fixes are completed within hours, even for our international offices. What impressed us most was how seamlessly they took over operations without any disruption to our users worldwide."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: #3A86FF; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-server" style="font-size: 1.8rem; color: white;"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Charlie Adnara</h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-content">"Our manual membership tracking process was error-prone until Shinka implemented their automated solution. By connecting our forms with PayPal's API and building tracking dashboards, they turned a multi-day administrative burden into a process that completes itself with perfect accuracy, giving us real-time visibility into membership status."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background-color: #3A86FF; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-hands-helping" style="font-size: 1.8rem; color: white;"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Administration Team</h4>
+                            <p>Community Non-Profit Organization</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="carousel-nav">
+                <div class="carousel-dot active"></div>
+                <div class="carousel-dot"></div>
+                <div class="carousel-dot"></div>
+                <div class="carousel-dot"></div>
+            </div>
         </div>
-        <div class="carousel-nav">
-            <div class="carousel-dot active"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-            <div class="carousel-dot"></div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- Contact Section -->
-<section id="contact" class="contact">
+    <section id="contact" class="contact">
     <h2 class="section-title" style="color: var(--primary); margin-bottom: 1rem;">Free Consultation</h2>
     <p style="text-align: center; max-width: 700px; margin: 0 auto 4rem; font-size: 1.2rem; color: #555;">
-        Choose how you'd like to connect with us - send a message or book a meeting directly with our team.
+        Choose how you'd like to connect with us
     </p>
     
     <div class="contact-container">
@@ -1045,101 +272,87 @@
                 </div>
                 <div class="contact-text">
                     <h4>Call Us</h4>
-                    <p>+1 (555) 123-4567</p>
+                    <p>+1 (757) 663-9811</p>
                 </div>
             </div>
-            <div class="contact-method">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="contact-text">
-                    <h4>Visit Us</h4>
-                    <p>1293 Broadway, New York, NY</p>
-                </div>
+			
+			<div class="booking-section">
+                <h3>Schedule a Meeting</h3>
+                <a href="https://calendar.zoho.com/eventreq/zz08011230aacd15bf4e3f29224cf96f5793aa0ad7673fef99fb3ebaee028d9f27f023af87d81ed84e94383c05e0c1a206e2577e04"
+                       target="_blank" 
+                       class="submit-btn booking-btn">
+                        <i class="fas fa-calendar-alt"></i> Book Appointment
+                    </a>
+                <p class="booking-note">
+                    Need to reschedule? Call or Email
+                </p>
             </div>
         </div>
         
-        <div class="contact-form">
-		  <!-- Tab Navigation -->
-		  <div class="form-tabs" style="display: flex; margin-bottom: 2rem; border-bottom: 1px solid #eee;">
-			<button class="tab-button active" data-tab="message-form" style="flex: 1; padding: 1rem; background: none; border: none; border-bottom: 3px solid var(--accent); font-weight: 600; cursor: pointer;">
-			  Send Message
-			</button>
-			<button class="tab-button" data-tab="booking-form" style="flex: 1; padding: 1rem; background: none; border: none; font-weight: 600; cursor: pointer;">
-			  Book Meeting
-			</button>
-		  </div>
-		  
-		  <!-- Message Form with Netlify + Popup -->
-		  <form 
-			id="messageForm" 
-			class="form-tab active" 
-			name="contact" 
-			method="POST" 
-			data-netlify="true"
-			netlify-honeypot="bot-field">
-			<!-- Netlify Bot Detection -->
-			<div class="honeypot" style="display: none;">
-			  <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        <div class="contact-form">     
+            <!-- Message Form -->
+            <div class="message-form">
+            <h2>Send Us a Message</h2>
+				<form id="messageForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+					<div class="honeypot">
+						<label>Don't fill this out: <input name="bot-field"></label>
+					</div>
+					
+					<div class="form-group">
+						<label for="name">Your Name</label>
+						<input type="text" id="name" name="name" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Email Address</label>
+						<input type="email" id="email" name="email" required>
+					</div>
+					<div class="form-group">
+						<label for="company-size">Company Size (Optional)</label>
+						<select id="company-size" name="company-size">
+							<option value="">Select company size (optional)</option>
+							<option value="<50">Under 50 employees</option>
+							<option value="50-100">50-100 employees</option>
+							<option value="100-250">100-250 employees</option>
+							<option value="250-500">250-500 employees</option>
+							<option value="500-1000">500-1,000 employees</option>
+							<option value="1000+">1,000+ employees</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="service">Service Interest</label>
+						<select id="service" name="service" required>
+							<option value="">What can we help with?</option>
+							<option value="development">Business software</option>
+							<option value="data">Data & reports</option>
+							<option value="cloud">Cloud systems</option>
+							<option value="ai">AI tools</option>
+							<option value="security">Security</option>
+							<option value="strategy">Tech planning</option>
+							<option value="ecommerce">Online stores</option>
+							<option value="support">Tech support</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="message">Project Details</label>
+						<textarea id="message" name="message" required></textarea>
+					</div>
+					
+					<input type="hidden" name="form-name" value="contact">
+					<button type="submit" class="submit-btn">
+						Send Message <i class="fas fa-paper-plane"></i>
+					</button>
+				</form>
 			</div>
-			
-			<!-- Form Fields -->
-			<div class="form-group">
-			  <label for="name">Your Name</label>
-			  <input type="text" id="name" name="name" required>
-			</div>
-			<div class="form-group">
-			  <label for="email">Email Address</label>
-			  <input type="email" id="email" name="email" required>
-			</div>
-			<div class="form-group">
-			  <label for="service">Service Interest</label>
-			  <select id="service" name="service" required>
-				<option value="">What can we help with?</option>
-				<option value="development">Business software</option>
-				<option value="data">Data & reports</option>
-				<option value="cloud">Cloud systems</option>
-				<option value="ai">AI tools</option>
-				<option value="security">Security</option>
-				<option value="strategy">Tech planning</option>
-				<option value="ecommerce">Online stores</option>
-				<option value="support">Tech support</option>
-				<option value="other">Other</option>
-			  </select>
-			</div>
-			<div class="form-group">
-			  <label for="message">Project Details</label>
-			  <textarea id="message" name="message" required></textarea>
-			</div>
-			
-			<input type="hidden" name="form-name" value="contact">
-			
-			<button type="submit" class="submit-btn">
-			  Send Message <i class="fas fa-paper-plane"></i>
-			</button>
-		  </form>
 		</div>
-
-		<!-- Success Popup (hidden by default) -->
-		<div id="successPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; box-shadow: 0 0 20px rgba(0,0,0,0.2); z-index: 1000; border-radius: 8px;">
-		  <h3>Thank you!</h3>
-		  <p>Your message has been sent successfully.</p>
-		  <button onclick="closePopup()" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+		<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000;"></div>
+		<div id="successPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 2001; max-width: 500px; width: 90%;">
+			<h3 style="color: var(--primary); margin-bottom: 1rem;">Message Sent Successfully!</h3>
+			<p style="margin-bottom: 1.5rem;">Thank you for reaching out to Shinka Systems. We've received your message and will get back to you within 24 hours.</p>
+			<button onclick="closePopup()" class="cta-button" style="background: var(--secondary); margin: 0 auto; display: block;">
+				Close <i class="fas fa-times"></i>
+			</button>
 		</div>
-
-		<!-- Overlay (hidden by default) -->
-		<div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
-            
-            <!-- Booking Form - Using Calendly inline widget -->
-            <!--  <div id="bookingForm" class="form-tab" style="display: none; height: 600px;">
-                
-                <div class="calendly-inline-widget" 
-                     data-url="https://calendly.com/your-calendly-link" 
-                     style="min-width:320px;height:100%;border-radius:8px;"></div>
-                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-            </div>
-        </div>
-        -->
     </div>
 </section>
 
@@ -1148,234 +361,17 @@
         <div class="footer-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
-            <a href="#technologies">Technologies</a>
             <a href="#testimonials">Success Stories</a>
             <a href="#contact">Contact</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
         </div>
-       
+        
         <div class="copyright">
             &copy; 2025 Shinka Systems. All rights reserved.
         </div>
     </footer>
-<script>
-// DOM Content Loaded Event
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all components
-    initParticles();
-    initCarousel();
-    initIntersectionObserver();
-    initTabs();
-    initForms();
-});
 
-// Particle Effects
-function initParticles() {
-    const container = document.getElementById('particles');
-    if (!container) return;
-    
-    const particleCount = window.innerWidth < 768 ? 20 : 40;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('particle');
-        
-        // Random size between 2px and 5px
-        const size = Math.random() * 3 + 2;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        
-        // Random position
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.bottom = `-${size}px`;
-        
-        // Random animation
-        particle.style.animationDuration = `${Math.random() * 10 + 10}s`;
-        particle.style.animationDelay = `${Math.random() * 10}s`;
-        
-        container.appendChild(particle);
-    }
-}
-
-// Testimonial Carousel
-function initCarousel() {
-    const slides = document.querySelector('.testimonial-slides');
-    const dots = document.querySelectorAll('.carousel-dot');
-    if (!slides || dots.length === 0) return;
-    
-    let currentIndex = 0;
-    
-    function goToSlide(index) {
-        slides.scrollTo({
-            left: slides.children[index].offsetLeft,
-            behavior: 'smooth'
-        });
-        
-        // Update dots
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-        
-        currentIndex = index;
-    }
-    
-    // Dot click handlers
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
-    });
-    
-    // Auto-rotate every 5 seconds
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % dots.length;
-        goToSlide(currentIndex);
-    }, 5000);
-}
-
-// Intersection Observer for Animations
-function initIntersectionObserver() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    document.querySelectorAll('.service-card, .tech-category, .stat-item').forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// Tab System
-function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    if (tabButtons.length === 0) return;
-    
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons and tabs
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
-                btn.style.borderBottom = 'none';
-            });
-            
-            // Add active class to clicked button
-            button.classList.add('active');
-            button.style.borderBottom = '3px solid var(--accent)';
-            
-            // Hide all tabs
-            document.querySelectorAll('.form-tab').forEach(tab => {
-                tab.style.display = 'none';
-            });
-            
-            // Show corresponding tab
-            const tabId = button.getAttribute('data-tab');
-            const tabToShow = document.getElementById(tabId);
-            if (tabToShow) {
-                tabToShow.style.display = 'block';
-            }
-        });
-    });
-}
-
-// Form Handling
-function initForms() {
-    // Contact Form with Honeypot
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const honeypot = this.querySelector('[name="bot-field"]').value;
-            
-            if (honeypot) {
-                return false; // Likely a bot
-            }
-            
-            /* To be implemented later with database integration
-            // Here to send the form data to the server
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            this.reset();
-            */
-            
-            // Temporary implementation
-            alert('Form submission will be enabled soon. For now, please contact us directly.');
-            this.reset();
-        });
-    }
-	
-	// Handle form submission
-	  document.getElementById("messageForm").addEventListener("submit", function(e) {
-		e.preventDefault();
-		
-		// Submit to Netlify
-		fetch("/", {
-		  method: "POST",
-		  body: new FormData(this)
-		})
-		.then(response => {
-		  if (response.ok) {
-			// Show success popup
-			document.getElementById("successPopup").style.display = "block";
-			document.getElementById("overlay").style.display = "block";
-			// Reset form
-			this.reset();
-		  }
-		})
-		.catch(error => {
-		  alert("There was an error sending your message. Please try again.");
-		});
-	  });
-
-	  function closePopup() {
-		document.getElementById("successPopup").style.display = "none";
-		document.getElementById("overlay").style.display = "none";
-	  }
-
-    // Message Form with Fetch API - Commented out for later implementation
-    /*
-    const messageForm = document.getElementById('messageForm');
-    if (messageForm) {
-        messageForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const form = e.target;
-            const formData = new FormData(form);
-            
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    alert('Thank you for your message! We\'ll get back to you soon.');
-                    form.reset();
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('There was a problem submitting your form. Please try again or contact us directly.');
-            }
-        });
-    }
-    */
-
-    // Booking functionality - Commented out for later implementation
-    /*
-    function initBooking() {
-        // Booking system to be implemented later
-        console.log('Booking system will be implemented in phase 2');
-    }
-    initBooking();
-    */
-}
-</script>
-
+    <script src="main.js"></script>
 </body>
 </html>
