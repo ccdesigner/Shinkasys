@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCarousel();
     initIntersectionObserver();
     initForms();
+	initCalendarModal();
 });
 
 // Particle Effects
@@ -35,7 +36,6 @@ function initParticles() {
     }
 }
 
-// Testimonial Carousel
 function initCarousel() {
     const slides = document.querySelector('.testimonial-slides');
     const dots = document.querySelectorAll('.carousel-dot');
@@ -44,7 +44,8 @@ function initCarousel() {
     let currentIndex = 0;
     let autoRotateInterval;
     const rotationDelay = 25000; // 25 seconds
-    
+    let startX, moveX;
+
     function goToSlide(index) {
         currentIndex = index % dots.length;
         if (currentIndex < 0) currentIndex = dots.length - 1;
@@ -75,6 +76,44 @@ function initCarousel() {
             goToSlide(currentIndex + 1);
         }, rotationDelay);
     }
+
+    // Swipe/touch logic
+    slides.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        clearInterval(autoRotateInterval);
+    });
+
+    slides.addEventListener('touchmove', (e) => {
+        moveX = e.touches[0].clientX;
+    });
+
+    slides.addEventListener('touchend', () => {
+        handleSwipe();
+        startAutoRotation();
+    });
+
+    // Mouse drag for desktop
+    slides.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        clearInterval(autoRotateInterval);
+    });
+
+    slides.addEventListener('mousemove', (e) => {
+        if (e.buttons === 1) moveX = e.clientX;
+    });
+
+    slides.addEventListener('mouseup', () => {
+        handleSwipe();
+        startAutoRotation();
+    });
+
+    function handleSwipe() {
+        if (startX - moveX > 50) { // Swipe left
+            goToSlide(currentIndex + 1);
+        } else if (startX - moveX < -50) { // Swipe right
+            goToSlide(currentIndex - 1);
+        }
+    }
     
     // Pause on hover
     const carousel = document.querySelector('.testimonial-carousel');
@@ -102,7 +141,7 @@ function initIntersectionObserver() {
         threshold: 0.1
     });
 
-    document.querySelectorAll('.service-card, .tech-category, .stat-item').forEach(el => {
+    document.querySelectorAll('.service-card').forEach(el => {
         observer.observe(el);
     });
 }
@@ -160,4 +199,32 @@ function initForms() {
         document.getElementById("successPopup").style.display = "none";
         document.getElementById("overlay").style.display = "none";
     };
+}
+
+function initCalendarModal() {
+    const modal = document.getElementById("calendarModal");
+    const btn = document.getElementById("calendarBtn");
+    const span = document.getElementsByClassName("close")[0];
+
+    if (!modal || !btn) return;
+
+    // Open modal when button is clicked
+    btn.onclick = function() {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+    }
+
+    // Close modal when X is clicked
+    span.onclick = function() {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    }
 }

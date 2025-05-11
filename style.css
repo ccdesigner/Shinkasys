@@ -323,79 +323,6 @@ nav {
     margin-bottom: 2rem;
 }
 
-.tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 1.5rem;
-}
-
-.tech-item {
-    background: rgba(58, 134, 255, 0.1);
-    color: var(--secondary);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-/* Skills/Technologies Section */
-.technologies {
-    padding: 8rem 5%;
-    background: var(--light);
-}
-
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 3rem auto 0;
-}
-
-.tech-category {
-    background: white;
-    border-radius: 15px;
-    padding: 2.5rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.tech-category h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.tech-category h3 i {
-    color: var(--accent);
-}
-
-.tech-list {
-    list-style: none;
-}
-
-.tech-list li {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    position: relative;
-    padding-left: 1.8rem;
-}
-
-.tech-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 8px;
-    height: 8px;
-    background: var(--secondary);
-    border-radius: 50%;
-}
-
 /* Testimonials Carousel */
 .testimonials {
     padding: 8rem 5%;
@@ -421,10 +348,6 @@ nav {
 }
 
 /* Hide scrollbar for Chrome/Safari */
-.testimonial-slides::-webkit-scrollbar {
-    display: none;
-}
-
 .testimonial-slides::-webkit-scrollbar {
     display: none;
 }
@@ -757,13 +680,50 @@ select:focus {
     }
 }
 
-
-
-
 .honeypot {
     position: absolute;
     left: -9999px;
 }
+
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.calendar-iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
 
 /* Footer */
 footer {
@@ -823,7 +783,7 @@ footer {
     transform: translateY(-3px);
 }
 
-.copyright {
+.right-llc {
     opacity: 0.7;
     font-size: 0.9rem;
     margin-top: 2rem;
@@ -840,12 +800,26 @@ footer {
     }
 }
 
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .modal-content {
+    margin: 10% auto;
+    width: 95%;
+    height: 80vh;
+  }
+  
+  .calendar-iframe {
+    height: 70vh;
+  }
+}
+
 @media (max-width: 768px) {
     .nav-links {
         display: none;
     }
 
     .hero {
+		padding-top: 80px;
         padding: 0 5%;
         text-align: center;
     }

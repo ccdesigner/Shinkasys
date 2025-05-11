@@ -29,7 +29,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Technology Services That Work As Hard As You Do</h1>
-            <p>We design complete systems that handle the tech side of your operations so you don't have to. Whether you need to automate repetitive work, organize customer data, protect your business, or prepare for growth, we provide solutions that the first time, every time.</p>
+            <p>At Shinka Systems, we engineer complete technology solutions that power your operations so you can focus on what matters most. Based in Houston, Texas, we specialize in automating workflows, securing business data, and building scalable systems that work right the first time - every time. Let us handle the tech while you grow your business.</p>
             <div style="display: flex; gap: 1.5rem; margin-top: 3rem;">
                 <a href="#contact" class="cta-button">
                     Get Started <i class="fas fa-arrow-right"></i>
@@ -275,18 +275,37 @@
                     <p>+1 (757) 663-9811</p>
                 </div>
             </div>
+			<div class="contact-method">
+				<div class="contact-icon">
+					<i class="fas fa-map-marker-alt"></i>
+				</div>
+				<div class="contact-text">
+					<h4>Proudly Based In</h4>
+					<p>Houston, Texas</p>
+				</div>
+			</div>
 			
 			<div class="booking-section">
-                <h3>Schedule a Meeting</h3>
-                <a href="https://calendar.zoho.com/eventreq/zz08011230aacd15bf4e3f29224cf96f5793aa0ad7673fef99fb3ebaee028d9f27f023af87d81ed84e94383c05e0c1a206e2577e04"
-                       target="_blank" 
-                       class="submit-btn booking-btn">
-                        <i class="fas fa-calendar-alt"></i> Book Appointment
-                    </a>
-                <p class="booking-note">
-                    Need to reschedule? Call or Email
-                </p>
+				<button id="calendarBtn" class="cta-button">
+				  Book a Consultation <i class="fas fa-calendar-alt"></i>
+				</button>
+				<p class="booking-note">
+						Need to reschedule? Call or Email
+				 </p>
+			 </div>
+				
+			<div id="calendarModal" class="modal">
+                <div class="modal-content">
+					<span class="close">&times;</span>
+					<iframe src="https://calendar.zoho.com/eventreqForm/zz08011230aacd15bf4e3f29224cf96f5793aa0ad7673fef99fb3ebaee028d9f27f023af87d81ed84e94383c05e0c1a206e2577e04?theme=0&l=en&tz=America%2FChicago" 
+							title="Shinka Systems Consultation" 
+							frameborder="0" 
+							scrolling="no" 
+							allowtransparency="true"
+							class="calendar-iframe"></iframe>
+				</div>
             </div>
+			
         </div>
         
         <div class="contact-form">     
@@ -357,7 +376,7 @@
 </section>
 
     <footer>
-        <div class="footer-logo">Shinka Systems</div>
+        <i class="fas fa-code logo-icon"; style="padding-bottom: 25px"></i>
         <div class="footer-links">
             <a href="#home">Home</a>
             <a href="#services">Services</a>
@@ -367,8 +386,8 @@
             <a href="#">Terms of Service</a>
         </div>
         
-        <div class="copyright">
-            &copy; 2025 Shinka Systems. All rights reserved.
+        <div class="right-llc">
+            2025 Shinka Systems, LLC.
         </div>
     </footer>
 
