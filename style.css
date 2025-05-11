@@ -41,6 +41,20 @@ body {
 }
 
 /* Glass Morphism Navigation */
+.logo {
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    color: var(--accent);
+}
+
+
 nav {
     position: fixed;
     width: 100%;
@@ -54,19 +68,6 @@ nav {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.logo {
-    font-weight: 800;
-    font-size: 1.8rem;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.logo-icon {
-    color: var(--accent);
 }
 
 .nav-links {
@@ -96,6 +97,55 @@ nav {
 
 .nav-links a:hover::after {
     width: 100%;
+}
+
+/* Mobile Menu Styles */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark);
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 60px; /* Below nav */
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links.active {
+        max-height: 300px;
+        padding: 1rem 0;
+    }
+    
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+    }
 }
 
 /* Hero Section with Floating Elements */
@@ -705,6 +755,7 @@ select:focus {
   border-radius: 8px;
   width: 90%;
   max-width: 500px;
+  max-height: 600px;
   position: relative;
 }
 
@@ -805,23 +856,43 @@ footer {
   .modal-content {
     margin: 10% auto;
     width: 95%;
-    height: 80vh;
+    height: 60vh;
   }
   
   .calendar-iframe {
-    height: 70vh;
+    height: 50vh;
   }
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
+	nav {
+		padding: 0.5rem 5%;
+	}
 
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 60px; /* Below nav bar */
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.8);
+        display: none; /* Start hidden */
+    }
+    
+    .nav-links.active {
+        display: flex; /* Show when active */
+    }
+    
     .hero {
-		padding-top: 80px;
-        padding: 0 5%;
-        text-align: center;
+        padding-top: 100px;
+        padding-left: 5%;
+        padding-right: 5%;
     }
 
     .hero-content {

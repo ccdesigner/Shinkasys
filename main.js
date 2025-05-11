@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initIntersectionObserver();
     initForms();
 	initCalendarModal();
+	initMobileMenu();
 });
 
 // Particle Effects
@@ -34,6 +35,24 @@ function initParticles() {
         
         container.appendChild(particle);
     }
+}
+
+function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (!hamburger || !navLinks) return;
+    
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        // Toggle icon between bars and times
+        const icon = hamburger.querySelector('i');
+        if (navLinks.classList.contains('active')) {
+            icon.classList.replace('fa-bars', 'fa-times');
+        } else {
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
+    });
 }
 
 function initCarousel() {
