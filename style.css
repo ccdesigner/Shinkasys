@@ -890,7 +890,7 @@ footer {
     }
     
     .hero {
-        padding-top: 100px;
+		height: 120vh;
         padding-left: 5%;
         padding-right: 5%;
     }

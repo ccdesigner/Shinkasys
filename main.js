@@ -20,8 +20,8 @@ function initParticles() {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         
-        // Random size between 2px and 5px
-        const size = Math.random() * 3 + 2;
+        // Random size between 2px and 10px
+        const size = Math.random() * 10 + 2;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
         
