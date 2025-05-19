@@ -373,6 +373,22 @@ nav {
     margin-bottom: 2rem;
 }
 
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+}
+
+.tech-item {
+    background: rgba(58, 134, 255, 0.1);
+    color: var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 /* Testimonials Carousel */
 .testimonials {
     padding: 8rem 5%;
