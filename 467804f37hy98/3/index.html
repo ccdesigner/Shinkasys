@@ -868,18 +868,8 @@
         </div>
     </div>
 
-    <div id="floatWidget" style="position:fixed;top:300px;left:50px;z-index:9999;background:rgba(2,0,0,0.5);padding:10px;border-radius:1px;cursor:move;">
-  <button onclick="location.href='../1/index.html'" style="margin:5px;width:100%;">Page 1</button>
-  <button onclick="location.href='../2/index.html'" style="margin:5px;width:100%;">Page 2</button>
-  <button onclick="location.href='../3/index.html'" style="margin:5px;width:100%;">Page 3</button>
-  <button onclick="location.href='../4/index.html'" style="margin:5px;width:100%;">Page 4</button>
-</div>
+    <script src="../widget_goto.js"></script>
 		<script>
-		const w=document.getElementById("floatWidget");
-  let d=false,oX=0,oY=0;
-  w.onmousedown=e=>{d=true;oX=e.clientX-w.offsetLeft;oY=e.clientY-w.offsetTop};
-  document.onmousemove=e=>{if(d){w.style.left=e.clientX-oX+"px";w.style.top=e.clientY-oY+"px"}};
-  document.onmouseup=()=>d=false;
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mainNav = document.getElementById('mainNav');
