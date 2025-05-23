@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Driving school with adult, teen, test, and corporate training packages." />
+  <title>Road Ready Driving School</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f7f9fc;
+      color: #333;
+    }
+
+    header.hero {
+      background: #0053a0;
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .btn-primary {
+      background: #ffc107;
+      color: #000;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    label, select, input {
+      display: block;
+      margin: 0.5rem 0;
+    }
+
+    select, input[type="text"], input[type="date"], input[type="number"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    #booking-form-container {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    #cart-drawer {
+      position: fixed;
+      top: 2rem;
+      right: 1rem;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      width: 260px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #cart-items li {
+      font-size: 0.9rem;
+      margin: 0.25rem 0;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #005ecb;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Master the Road with Confidence</h1>
+    <p>Adult & Teen Driving Lessons | DPS Road Test | Corporate Training</p>
+    <a href="#book" class="btn-primary">Book a Course</a>
+  </header>
+
+  <main>
+    <section id="book">
+      <h2>Book a Driving Course</h2>
+      <label for="service-select">Choose a Service</label>
+      <select id="service-select" onchange="showForm(this.value)">
+        <option value="">-- Select a Service --</option>
+        <option value="adult-driving">Adult Driving Packages</option>
+        <option value="adult-permit">Adult Permit Class (6 hrs)</option>
+        <option value="road-test-dps">Road Test @ DPS</option>
+        <option value="road-test-inhouse">Road Test @ Road Ready</option>
+        <option value="teen-education">Teen Driver Education</option>
+        <option value="hourly-packages">Hourly Driving Packages</option>
+        <option value="corporate">Corporate Training</option>
+      </select>
+
+      <div id="booking-form-container"></div>
+    </section>
+  </main>
+
+  <div id="cart-drawer">
+    <h4>Your Cart</h4>
+    <ul id="cart-items"></ul>
+    <p><strong>Total:</strong> $<span id="cart-total">0</span></p>
+    <button onclick="checkout()">Checkout</button>
+  </div>
+
+  <script>
+    function showForm(service) {
+      const container = document.getElementById('booking-form-container');
+      container.innerHTML = ''; // Clear previous
+
+      if (!service) return;
+
+      let formHTML = `
+        <form onsubmit="addToCart(event, '${service}')">
+          <h3>${getServiceLabel(service)}</h3>
+          <label>Date:</label>
+          <input type="date" name="date" required />
+
+          <label>Quantity:</label>
+          <input type="number" name="quantity" value="1" min="1" required />
+      `;
+
+      if (service === "adult-driving") {
+        formHTML += `
+          <label>Duration:</label>
+          <select name="duration">
+            <option value="2">2 hours</option>
+            <option value="4">4 hours</option>
+            <option value="6">6 hours</option>
+            <option value="8">8 hours</option>
+            <option value="10">10 hours</option>
+            <option value="12">12 hours</option>
+          </select>
+          <label><input type="checkbox" onchange="togglePickup(this)"> Need Pickup?</label>
+          <div id="pickup-fields" style="display:none">
+            <label>Pickup Address:</label>
+            <input type="text" name="pickup-address" />
+          </div>
+        `;
+      }
+
+      if (service === "road-test-dps") {
+        formHTML += `
+          <label>Test Option:</label>
+          <select name="test-type">
+            <option value="dps">DPS Test Only</option>
+            <option value="session+dps">1 Session + DPS Test</option>
+          </select>
+        `;
+      }
+
+      if (service === "teen-education") {
+        formHTML += `
+          <label>Teen Program:</label>
+          <select name="teen-option">
+            <option value="6mon">6 Month Program</option>
+            <option value="32hr">32 Hour Course</option>
+            <option value="14hr">14 Hour BTW</option>
+          </select>
+        `;
+      }
+
+      formHTML += `
+        <button type="submit">Add to Cart</button>
+        </form>
+      `;
+
+      container.innerHTML = formHTML;
+    }
+
+    function togglePickup(cb) {
+      document.getElementById('pickup-fields').style.display = cb.checked ? 'block' : 'none';
+    }
+
+    function addToCart(event, service) {
+      event.preventDefault();
+      const form = event.target;
+      const date = form.date.value;
+      const qty = parseInt(form.quantity.value);
+      const label = getServiceLabel(service);
+      const li = document.createElement('li');
+      li.textContent = `${label} ×${qty} on ${date}`;
+      document.getElementById('cart-items').appendChild(li);
+
+      const current = parseFloat(document.getElementById('cart-total').textContent);
+      const price = 60 * qty; // Example static price
+      document.getElementById('cart-total').textContent = (current + price).toFixed(2);
+
+      form.reset();
+    }
+
+    function checkout() {
+      alert("Proceeding to checkout!");
+      // Integrate Stripe or server call here
+    }
+
+    function getServiceLabel(id) {
+      const labels = {
+        "adult-driving": "Adult Driving Package",
+        "adult-permit": "Adult Permit Class (6 hrs)",
+        "road-test-dps": "Road Test @ DPS",
+        "road-test-inhouse": "Road Test @ Road Ready",
+        "teen-education": "Teen Driver Education",
+        "hourly-packages": "Hourly Driving Packages",
+        "corporate": "Corporate Training"
+      };
+      return labels[id] || "Driving Course";
+    }
+  </script>
+
+</body>
+</html>

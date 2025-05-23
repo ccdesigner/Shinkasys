@@ -1,0 +1,89 @@
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+export default function DrivingSchoolHome() {
+  const [email, setEmail] = useState("");
+
+  return (
+    <div className="min-h-screen bg-white text-gray-900 font-sans">
+      {/* Header */}
+      <header className="p-6 shadow-md bg-blue-600 text-white flex justify-between items-center">
+        <h1 className="text-2xl font-bold">DrivePro Academy</h1>
+        <nav className="space-x-6">
+          <a href="#courses" className="hover:underline">Courses</a>
+          <a href="#about" className="hover:underline">About</a>
+          <a href="#account" className="hover:underline">Account</a>
+        </nav>
+      </header>
+
+      {/* Hero Section */}
+      <section className="p-10 text-center bg-gray-100">
+        <motion.h2
+          className="text-4xl font-bold mb-4"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Master the Road with Confidence
+        </motion.h2>
+        <p className="text-lg mb-6 max-w-xl mx-auto">
+          Explore our expert-designed driving courses, tailored for beginners to advanced drivers. Accessible on all devices.
+        </p>
+        <Button size="lg">Browse Courses</Button>
+      </section>
+
+      {/* Courses Section */}
+      <section id="courses" className="p-10 bg-white">
+        <h3 className="text-3xl font-bold mb-6 text-center">Our Courses</h3>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { title: "Beginner Course", price: "$49" },
+            { title: "Intermediate Course", price: "$79" },
+            { title: "Advanced Skills", price: "$99" },
+          ].map((course, index) => (
+            <Card key={index} className="rounded-2xl shadow-md">
+              <CardContent className="p-6">
+                <h4 className="text-xl font-semibold mb-2">{course.title}</h4>
+                <p className="mb-4">Learn the essentials and build confidence behind the wheel.</p>
+                <p className="font-bold mb-4">{course.price}</p>
+                <Button>Add to Account</Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="p-10 bg-gray-100 text-center">
+        <h3 className="text-3xl font-bold mb-4">Why Choose DrivePro?</h3>
+        <p className="max-w-2xl mx-auto">
+          With certified instructors, mobile-friendly lessons, and a simple interface to track purchases and course progress, DrivePro makes learning to drive efficient and stress-free.
+        </p>
+      </section>
+
+      {/* Account Section */}
+      <section id="account" className="p-10 bg-white">
+        <h3 className="text-3xl font-bold mb-6 text-center">Your Account</h3>
+        <div className="max-w-md mx-auto">
+          <label className="block mb-2 text-lg">Enter your email to track your courses</label>
+          <Input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            className="mb-4"
+          />
+          <Button>Access Dashboard</Button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="p-6 text-center bg-blue-600 text-white">
+        <p>&copy; 2025 DrivePro Academy. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}

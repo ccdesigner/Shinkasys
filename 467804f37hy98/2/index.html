@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Road Ready Driving School</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffe0e0 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #dc2626 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></svg>');
+            pointer-events: none;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: -5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #fecaca;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #dc2626 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,20 50,50 T100,50" stroke="white" stroke-width="0.3" fill="none" opacity="0.2"/><path d="M0,60 Q25,30 50,60 T100,60" stroke="white" stroke-width="0.2" fill="none" opacity="0.15"/></svg>');
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .cta-button {
+            background: #dc2626;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: white;
+            position: relative;
+        }
+        
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb 0%, #dc2626 100%);
+        }
+        
+        .services h3 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb 0%, #dc2626 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .service-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+        
+        .service-card p {
+            color: #6b7280;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .service-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .duration {
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .service-button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            color: white;
+            padding: 12px 0;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .service-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Side Panel Styles */
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            transition: right 0.4s ease-in-out;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .side-panel.active {
+            right: 0;
+        }
+        
+        .side-panel-header {
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .side-panel-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        
+        .side-panel-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .side-panel-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .side-panel-subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        .side-panel-content {
+            padding: 30px;
+        }
+        
+        .panel-section {
+            margin-bottom: 30px;
+        }
+        
+        .panel-section h4 {
+            font-size: 1.3rem;
+            color: #1f2937;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+            position: relative;
+        }
+        
+        .panel-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #2563eb, #dc2626);
+        }
+        
+        .panel-section p, .panel-section ul {
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .panel-section ul {
+            padding-left: 20px;
+        }
+        
+        .panel-section li {
+            margin-bottom: 8px;
+        }
+        
+        .pricing-highlight {
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffe0e0 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .pricing-highlight .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        
+        .pricing-highlight .duration {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        .panel-book-button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            color: white;
+            padding: 18px 0;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .panel-book-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .panel-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #f0f8ff 100%);
+            text-align: center;
+        }
+        
+        .about h3 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .about p {
+            font-size: 1.2rem;
+            color: #4b5563;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .feature h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+        
+        .feature p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+        
+        /* Account Section */
+        .account {
+            padding: 80px 0;
+            background: white;
+            text-align: center;
+        }
+        
+        .account h3 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .account-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #f0f8ff 0%, #ffe0e0 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .account-form label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .account-form input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .account-form input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        
+        .account-button {
+            width: 100%;
+            background: linear-gradient(135deg, #2563eb 0%, #dc2626 100%);
+            color: white;
+            padding: 15px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .account-button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #dc2626 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/></svg>');
+            pointer-events: none;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .side-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <!-- Logo SVG -->
+                    <svg width="60" height="40" viewBox="0 0 60 40">
+                        <path d="M5,20 Q15,10 25,20 Q35,30 45,20" stroke="#60A5FA" stroke-width="2" fill="none" />
+                        <path d="M8,25 Q18,15 28,25 Q38,35 48,25" stroke="#3B82F6" stroke-width="1.5" fill="none" />
+                        <path d="M45,8 Q50,5 55,12 Q52,18 48,15 Q45,12 45,8" fill="#EF4444" />
+                        <rect x="10" y="30" width="40" height="8" fill="#1E40AF" rx="2" />
+                    </svg>
+                    <div class="logo-text">
+                        <h1>ROAD READY</h1>
+                        <p>DRIVING SCHOOL</p>
+                    </div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#account">Account</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Get Road Ready with Confidence</h2>
+                <p>Master the art of driving with our comprehensive programs designed for every skill level. From nervous beginners to confident advanced drivers, we'll get you road ready.</p>
+                <a href="#services" class="cta-button">Explore Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h3>Our Services</h3>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h4>Adult Driving Lessons</h4>
+                    <p>Comprehensive driving instruction for adults of all experience levels.</p>
+                    <div class="service-details">
+                        <span class="price">$399</span>
+                        <span class="duration">20 hours</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('adult-lessons')">Book Now</button>
+                </div>
+                
+                <div class="service-card">
+                    <h4>Adult Permit Class</h4>
+                    <p>Prepare for your written driving test with our expert instructors.</p>
+                    <div class="service-details">
+                        <span class="price">$149</span>
+                        <span class="duration">6 hours</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('permit-class')">Book Now</button>
+                </div>
+                
+                <div class="service-card">
+                    <h4>Road Test @ DPS</h4>
+                    <p>Official road test administered at your local DPS location.</p>
+                    <div class="service-details">
+                        <span class="price">$99</span>
+                        <span class="duration">1 hour</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('road-test-dps')">Book Now</button>
+                </div>
+                
+                <div class="service-card">
+                    <h4>Road Test @ RoadReady</h4>
+                    <p>Take your road test at our certified testing location.</p>
+                    <div class="service-details">
+                        <span class="price">$129</span>
+                        <span class="duration">1 hour</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('road-test-rr')">Book Now</button>
+                </div>
+                
+                <div class="service-card">
+                    <h4>Teen Driver Education</h4>
+                    <p>Complete teen driver education program for license requirements.</p>
+                    <div class="service-details">
+                        <span class="price">$499</span>
+                        <span class="duration">32 hours</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('teen-education')">Book Now</button>
+                </div>
+                
+                <div class="service-card">
+                    <h4>Corporate Training</h4>
+                    <p>Specialized driver training for corporate fleets and employees.</p>
+                    <div class="service-details">
+                        <span class="price">Call for quote</span>
+                        <span class="duration">Custom</span>
+                    </div>
+                    <button class="service-button" onclick="openPanel('corporate-training')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h3>Why Choose Road Ready?</h3>
+            <p>With certified instructors, cutting-edge facilities, and a proven track record of success, Road Ready transforms nervous beginners into confident, skilled drivers. Our dynamic approach combines traditional instruction with modern technology for the most effective learning experience.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <h4>Certified Instructors</h4>
+                    <p>Expert guidance from licensed professionals with years of experience</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🚗</div>
+                    <h4>Modern Fleet</h4>
+                    <p>Well-maintained vehicles with the latest safety features</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h4>Proven Results</h4>
+                    <p>95% pass rate on first attempt with our comprehensive programs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Account Section -->
+    <section id="account" class="account">
+        <div class="container">
+            <h3>Your Learning Dashboard</h3>
+            <div class="account-form">
+                <label for="email">Access your personalized learning portal</label>
+                <input type="email" id="email" placeholder="Enter your email address">
+                <button class="account-button">Access Dashboard</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <svg width="40" height="26" viewBox="0 0 40 26">
+                        <path d="M3,13 Q10,6 17,13 Q24,20 31,13" stroke="white" stroke-width="1.5" fill="none" />
+                        <path d="M5,16 Q12,10 19,16 Q26,22 33,16" stroke="white" stroke-width="1" fill="none" />
+                        <path d="M30,5 Q33,3 36,8 Q34,12 31,10 Q30,8 30,5" fill="white" />
+                    </svg>
+                    <span>ROAD READY</span>
+                </div>
+                <p>&copy; 2025 Road Ready Driving School. Get Ready. Get Confident. Get Driving.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Side Panel Overlay -->
+    <div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
+
+    <!-- Side Panel -->
+    <div class="side-panel" id="sidePanel">
+        <div class="side-panel-header">
+            <button class="side-panel-close" onclick="closePanel()">&times;</button>
+            <div class="side-panel-title" id="panelTitle">Course Details</div>
+            <div class="side-panel-subtitle" id="panelSubtitle">Learn more about this program</div>
+        </div>
+        <div class="side-panel-content" id="panelContent">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <div id="floatWidget" style="position:fixed;top:300px;left:50px;z-index:9999;background:rgba(2,0,0,0.5);padding:10px;border-radius:1px;cursor:move;">
+  <button onclick="location.href='../1/index.html'" style="margin:5px;width:100%;">Page 1</button>
+  <button onclick="location.href='../2/index.html'" style="margin:5px;width:100%;">Page 2</button>
+  <button onclick="location.href='../3/index.html'" style="margin:5px;width:100%;">Page 3</button>
+  <button onclick="location.href='../4/index.html'" style="margin:5px;width:100%;">Page 4</button>
+</div>
+		<script>
+		const w=document.getElementById("floatWidget");
+  let d=false,oX=0,oY=0;
+  w.onmousedown=e=>{d=true;oX=e.clientX-w.offsetLeft;oY=e.clientY-w.offsetTop};
+  document.onmousemove=e=>{if(d){w.style.left=e.clientX-oX+"px";w.style.top=e.clientY-oY+"px"}};
+  document.onmouseup=()=>d=false;
+        // Course data for the side panel
+        const courseData = {
+            'adult-lessons': {
+                title: 'Adult Driving Lessons',
+                subtitle: 'Comprehensive Behind-the-Wheel Training',
+                price: '$399',
+                duration: '20 hours',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">$399</span>
+                        <div class="duration">20 Hours of Instruction</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>What's Included</h4>
+                        <ul>
+                            <li>20 hours of personalized one-on-one instruction</li>
+                            <li>Pick-up and drop-off service within city limits</li>
+                            <li>Modern, dual-control vehicles with safety features</li>
+                            <li>Flexible scheduling including evenings and weekends</li>
+                            <li>Progress tracking and skill assessment</li>
+                            <li>Road test preparation and practice</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Perfect For</h4>
+                        <p>Adults who are learning to drive for the first time, those who need a refresher course, or drivers who want to improve their skills and confidence behind the wheel.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>What You'll Learn</h4>
+                        <ul>
+                            <li>Vehicle controls and basic operations</li>
+                            <li>Traffic laws and road signs</li>
+                            <li>Defensive driving techniques</li>
+                            <li>Parking and maneuvering skills</li>
+                            <li>Highway and city driving</li>
+                            <li>Emergency procedures</li>
+                        </ul>
+                    </div>
+                    
+                    <button class="panel-book-button">Book Adult Driving Lessons</button>
+                `
+            },
+            'permit-class': {
+                title: 'Adult Permit Class',
+                subtitle: 'Written Test Preparation Course',
+                price: '$149',
+                duration: '6 hours',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">$149</span>
+                        <div class="duration">6 Hours of Classroom Instruction</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Course Overview</h4>
+                        <p>Intensive classroom-based program designed to prepare you for the written portion of your driver's license test. Our experienced instructors will guide you through all the essential material you need to pass.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>What's Covered</h4>
+                        <ul>
+                            <li>Texas traffic laws and regulations</li>
+                            <li>Road signs and traffic signals</li>
+                            <li>Right-of-way rules</li>
+                            <li>Speed limits and driving conditions</li>
+                            <li>Alcohol and drug laws</li>
+                            <li>Practice tests and exam strategies</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Schedule Options</h4>
+                        <p>Choose from weekend intensive sessions or weekday evening classes. All materials and practice tests included.</p>
+                    </div>
+                    
+                    <button class="panel-book-button">Enroll in Permit Class</button>
+                `
+            },
+            'road-test-dps': {
+                title: 'Road Test @ DPS',
+                subtitle: 'Official State Road Test',
+                price: '$99',
+                duration: '1 hour',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">$99</span>
+                        <div class="duration">1 Hour Road Test Service</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Service Details</h4>
+                        <p>We'll accompany you to your local DPS office for your official road test. Our instructor will provide the vehicle and be there to support you through the entire process.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>What's Included</h4>
+                        <ul>
+                            <li>Use of our road test-ready vehicle</li>
+                            <li>Transportation to and from DPS office</li>
+                            <li>Pre-test vehicle inspection</li>
+                            <li>Instructor support and guidance</li>
+                            <li>Insurance and registration documentation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Requirements</h4>
+                        <p>You must have a valid learner's permit and have completed the required practice hours. DPS testing fee is separate and paid directly to the state.</p>
+                    </div>
+                    
+                    <button class="panel-book-button">Schedule DPS Road Test</button>
+                `
+            },
+            'road-test-rr': {
+                title: 'Road Test @ RoadReady',
+                subtitle: 'Convenient On-Site Testing',
+                price: '$129',
+                duration: '1 hour',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">$129</span>
+                        <div class="duration">1 Hour Road Test</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Convenient Alternative</h4>
+                        <p>Take your road test at our certified testing facility with our state-approved examiner. Skip the long DPS lines and test in a familiar environment.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Advantages</h4>
+                        <ul>
+                            <li>No waiting in long DPS lines</li>
+                            <li>Familiar testing environment</li>
+                            <li>Flexible scheduling options</li>
+                            <li>Same-day results and licensing</li>
+                            <li>Friendly, supportive atmosphere</li>
+                            <li>State-certified testing course</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>State Approved</h4>
+                        <p>Our facility is fully licensed by the Texas Department of Public Safety to conduct official road tests. Your license will be issued immediately upon passing.</p>
+                    </div>
+                    
+                    <button class="panel-book-button">Schedule Road Test Here</button>
+                `
+            },
+            'teen-education': {
+                title: 'Teen Driver Education',
+                subtitle: 'Complete License Program for Teens',
+                price: '$499',
+                duration: '32 hours',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">$499</span>
+                        <div class="duration">32 Hours Total Program</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Complete Package</h4>
+                        <p>State-required driver education program for teens aged 15-17. Meets all Texas requirements for obtaining a driver's license before age 18.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Program Structure</h4>
+                        <ul>
+                            <li>24 hours of classroom instruction</li>
+                            <li>8 hours of behind-the-wheel training</li>
+                            <li>Online course modules available</li>
+                            <li>Flexible scheduling for busy teens</li>
+                            <li>Parent involvement sessions</li>
+                            <li>Final exam and road test included</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Teen-Focused Curriculum</h4>
+                        <ul>
+                            <li>Graduated Driver License (GDL) program</li>
+                            <li>Risk awareness and decision making</li>
+                            <li>Distracted driving prevention</li>
+                            <li>Peer pressure and safe choices</li>
+                            <li>Technology and driving safety</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Completion Benefits</h4>
+                        <p>Upon completion, students receive their Certificate of Completion (DE-964) required by DPS, and may be eligible for insurance discounts.</p>
+                    </div>
+                    
+                    <button class="panel-book-button">Enroll Teen Driver Program</button>
+                `
+            },
+            'corporate-training': {
+                title: 'Corporate Training',
+                subtitle: 'Professional Fleet Driver Training',
+                price: 'Call for quote',
+                duration: 'Custom',
+                content: `
+                    <div class="pricing-highlight">
+                        <span class="price">Custom Quote</span>
+                        <div class="duration">Tailored to Your Needs</div>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Professional Services</h4>
+                        <p>Comprehensive driver training programs designed specifically for businesses, fleet operators, and corporate employees. Reduce liability, improve safety, and ensure compliance.</p>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Training Options</h4>
+                        <ul>
+                            <li>Defensive driving certification</li>
+                            <li>Fleet vehicle operation training</li>
+                            <li>Commercial vehicle instruction</li>
+                            <li>Safety compliance programs</li>
+                            <li>Refresher courses for existing drivers</li>
+                            <li>Accident prevention workshops</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Delivery Methods</h4>
+                        <ul>
+                            <li>On-site training at your facility</li>
+                            <li>Group sessions at our location</li>
+                            <li>Online and hybrid programs</li>
+                            <li>Individual coaching sessions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="panel-section">
+                        <h4>Benefits</h4>
+                        <p>Reduce insurance costs, improve employee safety records, ensure regulatory compliance, and demonstrate your commitment to road safety.</p>
+                    </div>
+                    
+                    <button class="panel-book-button">Request Corporate Quote</button>
+                `
+            }
+        };
+
+        // Panel control functions
+        function openPanel(courseId) {
+            const course = courseData[courseId];
+            if (course) {
+                document.getElementById('panelTitle').textContent = course.title;
+                document.getElementById('panelSubtitle').textContent = course.subtitle;
+                document.getElementById('panelContent').innerHTML = course.content;
+                
+                document.getElementById('sidePanel').classList.add('active');
+                document.getElementById('panelOverlay').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closePanel() {
+            document.getElementById('sidePanel').classList.remove('active');
+            document.getElementById('panelOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close panel with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePanel();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .feature').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

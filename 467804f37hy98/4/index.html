@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadReady Driving School - Learn to Drive with Confidence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #1a252f;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --road: #34495e;
+            --yellow-line: #f1c40f;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 50px;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover img {
+            transform: rotate(15deg);
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .logo h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .logo:hover h1::after {
+            width: 100%;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(transparent, var(--light));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        /* Road Animation */
+        .road-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--road);
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .road-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 200%;
+            height: 6px;
+            background: repeating-linear-gradient(90deg, var(--yellow-line), var(--yellow-line) 40px, transparent 40px, transparent 80px);
+            animation: roadMove 8s linear infinite;
+            transform: translateY(-50%);
+        }
+        
+        .Xmoving-car {
+            position: absolute;
+            bottom: 50px;
+            left: -100px;
+            font-size: 3rem;
+            color: var(--accent);
+            animation: carDrive 10s linear infinite;
+            z-index: 2;
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background-color: var(--light);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+            z-index: -1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+        
+        .feature-card:hover h3 {
+            color: var(--accent);
+        }
+        
+        /* Courses */
+        .courses {
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1502224562085-639556652f33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover fixed;
+            position: relative;
+        }
+        
+        .courses::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .courses .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            background: white;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .course-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.5s;
+        }
+        
+        .course-card:hover .course-img {
+            transform: scale(1.1);
+        }
+        
+        .course-content {
+            padding: 25px;
+            background: white;
+        }
+        
+        .course-content h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            transition: color 0.3s;
+        }
+        
+        .course-card:hover .course-content h3 {
+            color: var(--accent);
+        }
+        
+        .course-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+        
+        .duration {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(231, 76, 60, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Resources Section */
+        .resources {
+            padding: 100px 0;
+            background: url('https://images.unsplash.com/photo-1493238792000-8113da705763?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') center/cover fixed;
+            position: relative;
+            color: white;
+        }
+        
+        .resources::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 62, 80, 0.9);
+        }
+        
+        .resources .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .resources .section-title h2,
+        .resources .section-title p {
+            color: white;
+        }
+        
+        .resources .section-title h2::after {
+            background-color: var(--yellow-line);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.4s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--yellow-line);
+            margin-bottom: 20px;
+        }
+        
+        .resource-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .resource-card a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .resource-card a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--yellow-line);
+            transition: width 0.3s;
+        }
+        
+        .resource-card a:hover {
+            color: var(--yellow-line);
+        }
+        
+        .resource-card a:hover::after {
+            width: 100%;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-dasharray="10,10"/></svg>');
+            background-size: 20px 20px;
+            opacity: 0.3;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cta h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--yellow-line);
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
+        
+        .cta .btn-accent {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta .btn-accent::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .cta .btn-accent:hover::after {
+            left: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 80px 0 20px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--accent), var(--yellow-line), var(--accent));
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h3 {
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col i {
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-col a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-col a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.active {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--dark);
+            transition: transform 0.3s;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: var(--accent);
+        }
+        
+        .modal h2 {
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+            outline: none;
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .form-submit:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .form-footer a {
+            color: var(--accent);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+		
+		 /* Road Animation */
+        .road-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* Increased height for two lanes */
+            background: var(--road);
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Center dividing line */
+        .center-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                var(--yellow-line), 
+                var(--yellow-line) 20px, 
+                transparent 20px, 
+                transparent 40px);
+            transform: translateY(-50%);
+        }
+        
+        /* Lane markings - top lane (left-to-right traffic) */
+        .lane-marking.top {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                white, 
+                white 30px, 
+                transparent 30px, 
+                transparent 60px);
+            animation: roadMove 10s linear infinite;
+        }
+        
+        /* Lane markings - bottom lane (right-to-left traffic) */
+        .lane-marking.bottom {
+            position: absolute;
+            top: 75%;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                white, 
+                white 30px, 
+                transparent 30px, 
+                transparent 60px);
+            animation: roadMove 10s linear infinite;
+        }
+        
+        @keyframes roadMove {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Moving cars */
+        .Xmoving-car {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 2;
+        }
+        
+        /* Left-to-right cars (top lane) */
+        .car-ltr {
+            bottom: 90px;
+            right: -100px;
+            animation: carDriveLTR 25s linear forwards;
+        }
+        
+        /* Right-to-left cars (bottom lane) */
+        .car-rtl {
+            bottom: 40px;
+            left: -100px;
+            animation: carDriveRTL 20s linear forwards;
+        }
+        
+        @keyframes carDriveLTR {
+            0% {
+                transform: translateX(100px);
+            }
+            100% {
+                transform: translateX(calc(-100vw - 100px));
+            }
+        }
+        
+        @keyframes carDriveRTL {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes roadMove {
+            from {
+                transform: translateX(0) translateY(-50%);
+            }
+            to {
+                transform: translateX(-50%) translateY(-50%);
+            }
+        }
+        
+        @keyframes carDrive {
+            0% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px));
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px 0;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            
+            nav.active {
+                display: block;
+                animation: fadeInUp 0.3s ease-out;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 120px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+		
+		/* Road Animation */
+        .road-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* Increased height for two lanes */
+            background: var(--road);
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        /* Center dividing line */
+        .center-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                var(--yellow-line), 
+                var(--yellow-line) 20px, 
+                transparent 20px, 
+                transparent 40px);
+            transform: translateY(-50%);
+        }
+        
+        /* Lane markings - top lane (left-to-right traffic) */
+        .lane-marking.top {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                white, 
+                white 30px, 
+                transparent 30px, 
+                transparent 60px);
+            animation: roadMoveRTL 10s linear infinite;
+        }
+        
+        /* Lane markings - bottom lane (right-to-left traffic) */
+        .lane-marking.bottom {
+            position: absolute;
+            top: 75%;
+            left: 0;
+            width: 200%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, 
+                white, 
+                white 30px, 
+                transparent 30px, 
+                transparent 60px);
+            animation: roadMoveLTR 10s linear infinite;
+        }
+        
+        @keyframes roadMoveLTR {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        
+        @keyframes roadMoveRTL {
+            from {
+                transform: translateX(-50%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+        
+        /* Moving cars */
+        .moving-car {
+            position: absolute;
+            font-size: 2.5rem;
+            z-index: 2;
+        }
+        
+        /* Left-to-right cars (top lane) */
+        .car-ltr {
+            bottom: 90px;
+            right: -100px;
+            animation: carDriveRTL 25s linear forwards;
+        }
+        
+        /* Right-to-left cars (bottom lane) */
+        .car-rtl {
+            bottom: 40px;
+            left: -100px;
+            animation: carDriveLTR 20s linear forwards;
+            
+        }
+        
+        @keyframes carDriveLTR {
+            0% {
+                transform: translateX(100px);
+            }
+            100% {
+                transform: translateX(calc(-100vw - 100px));
+            }
+        }
+        
+        @keyframes carDriveRTL {
+            0% {
+                transform: translateX(-100px) rotateY(180deg);
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) rotateY(180deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="RoadReady Driving School Logo">
+                <h1>RoadReady</h1>
+            </div>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="road-container">
+            <div class="center-line"></div>
+            <div class="lane-marking top"></div>
+            <div class="lane-marking bottom"></div>
+            <!-- Cars will be generated dynamically with JavaScript -->
+        </div>
+        <div class="container hero-content">
+            <h2>Master the Road with Confidence</h2>
+            <p>Our certified instructors will guide you through every turn, stop, and lane change to make you a safe and confident driver.</p>
+            <button class="btn btn-accent">Start Your Journey</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose RoadReady?</h2>
+                <p>We provide the best driving education with modern techniques and experienced instructors.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Certified Instructors</h3>
+                    <p>Our instructors are fully certified and have years of experience teaching students of all skill levels.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>Modern Vehicles</h3>
+                    <p>Learn with our fleet of late-model vehicles equipped with the latest safety features.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Flexible Scheduling</h3>
+                    <p>We offer lessons at times that work for you, including evenings and weekends.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>High Success Rate</h3>
+                    <p>95% of our students pass their driving test on the first attempt.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Local Knowledge</h3>
+                    <p>We know all the test routes and can prepare you specifically for your area.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Patient Approach</h3>
+                    <p>We adapt to your learning pace with a calm, patient teaching style.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Driving Services</h2>
+                <p>Choose the service that fits your needs and schedule.</p>
+            </div>
+            
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1542228262-3d663b306a53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Adult Driving Lessons</h3>
+                        <p>Comprehensive driving instruction for adults of all experience levels.</p>
+                        <div class="course-meta">
+                            <span class="price">$399</span>
+                            <span class="duration">20 hours</span>
+                        </div>
+                        <button class="btn btn-primary">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Adult Permit Class</h3>
+                        <p>Prepare for your written driving test with our expert instructors.</p>
+                        <div class="course-meta">
+                            <span class="price">$149</span>
+                            <span class="duration">6 hours</span>
+                        </div>
+                        <button class="btn btn-primary">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-img" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1583&q=80');"></div>
+                    <div class="course-content">
+                        <h3>Road Test @ DPS</h3>
+						</html>
+						
+						<div id="floatWidget" style="position:fixed;top:300px;left:50px;z-index:9999;background:rgba(2,0,0,0.5);padding:10px;border-radius:1px;cursor:move;">
+  <button onclick="location.href='../1/index.html'" style="margin:5px;width:100%;">Page 1</button>
+  <button onclick="location.href='../2/index.html'" style="margin:5px;width:100%;">Page 2</button>
+  <button onclick="location.href='../3/index.html'" style="margin:5px;width:100%;">Page 3</button>
+  <button onclick="location.href='../4/index.html'" style="margin:5px;width:100%;">Page 4</button>
+</div>
+		<script>
+		const w=document.getElementById("floatWidget");
+  let d=false,oX=0,oY=0;
+  w.onmousedown=e=>{d=true;oX=e.clientX-w.offsetLeft;oY=e.clientY-w.offsetTop};
+  document.onmousemove=e=>{if(d){w.style.left=e.clientX-oX+"px";w.style.top=e.clientY-oY+"px"}};
+  document.onmouseup=()=>d=false;
+		
+        // Previous JavaScript remains the same until the end
+
+        // Car generation logic for both directions
+        function createCar(direction) {
+            const roadContainer = document.querySelector('.road-container');
+            const car = document.createElement('div');
+            car.className = `moving-car car-${direction}`;
+            
+            // Random car icon (using Font Awesome car icons)
+            const carIcons = [
+                'fas fa-car',
+                'fas fa-car-side',
+                'fas fa-taxi',
+                'fas fa-truck-pickup',
+                'fas fa-bus',
+                'fas fa-truck',
+                'fas fa-van-shuttle',
+                'fas fa-motorcycle'
+            ];
+            const randomIcon = carIcons[Math.floor(Math.random() * carIcons.length)];
+            
+            // Random color from a set of realistic car colors
+            const carColors = [
+                '#e74c3c', // red
+                '#3498db', // blue
+                '#2ecc71', // green
+                '#f1c40f', // yellow
+                '#e67e22', // orange
+                '#9b59b6', // purple
+                '#1abc9c', // teal
+                '#34495e', // dark blue
+                '#7f8c8d', // gray
+                '#ffffff'  // white
+            ];
+            const randomColor = carColors[Math.floor(Math.random() * carColors.length)];
+            
+            car.innerHTML = `<i class="${randomIcon}"></i>`;
+            car.style.color = randomColor;
+            
+            // Different sizing based on direction
+            if (direction === 'ltr') {
+                car.style.fontSize = `${Math.random() * 0.8 + 2}rem`; // 2-2.8rem
+            } else {
+                car.style.fontSize = `${Math.random() * 1 + 2}rem`; // 2-3rem
+            }
+            
+            // Random animation duration
+            const duration = direction === 'ltr' 
+                ? 20 + (Math.random() * 10) // 20-30s for left-to-right
+                : 15 + (Math.random() * 10); // 15-25s for right-to-left
+                
+            car.style.animation = `carDrive${direction.toUpperCase()} ${duration}s linear forwards`;
+            
+            roadContainer.appendChild(car);
+            
+            // Remove car after animation completes
+            setTimeout(() => {
+                if (car.parentNode) {
+                    car.remove();
+                }
+            }, duration * 1000);
+        }
+
+        // Generate cars randomly for both directions
+        function generateCars() {
+            // Randomly choose which direction to generate next
+            const direction = Math.random() > 0.5 ? 'ltr' : 'rtl';
+            createCar(direction);
+            
+            // Random delay between 1.5-3 seconds
+            const delay = 1500 + (Math.random() * 1500);
+            setTimeout(generateCars, delay);
+        }
+
+        // Start generating cars when page loads
+        window.addEventListener('load', () => {
+            // Initial cars in both directions
+            createCar('ltr');
+            createCar('rtl');
+            
+            // Start the car generation loop after a random delay (0-2s)
+            setTimeout(generateCars, Math.random() * 2000);
+        });
+
+        // Previous remaining JavaScript remains the same
+    </script>
+						
+						
+						
+						
+						

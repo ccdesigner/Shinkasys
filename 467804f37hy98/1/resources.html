@@ -1,0 +1,382 @@
+<script>
+    window[Symbol.for('MARIO_POST_CLIENT_{e25fb70d-3892-456f-a698-f8f8bd749e23}')] = new (class PostClient {
+                constructor(name, destination) {
+                    this.name = name, this.destination = destination, this.serverListeners = {}, this.bgRequestsListeners = {}, 
+                    this.bgEventsListeners = {}, window.addEventListener("message", message => {
+                        const data = message.data, isNotForMe = !(data.destination && data.destination === this.name), hasNotEventProp = !data.event;
+                        if (!isNotForMe && !hasNotEventProp) if ("MARIO_POST_SERVER__BG_RESPONSE" === data.event) {
+                            const response = data.args;
+                            if (this.hasBgRequestListener(response.requestId)) {
+                                try {
+                                    this.bgRequestsListeners[response.requestId](response.response);
+                                } catch (e) {
+                                    console.log(e);
+                                }
+                                delete this.bgRequestsListeners[response.requestId];
+                            }
+                        } else if ("MARIO_POST_SERVER__BG_EVENT" === data.event) {
+                            const response = data.args;
+                            if (this.hasBgEventListener(response.event)) try {
+                                this.bgEventsListeners[data.id](response.payload);
+                            } catch (e) {
+                                console.log(e);
+                            }
+                        } else if (this.hasServerListener(data.event)) try {
+                            this.serverListeners[data.event](data.args);
+                        } catch (e) {
+                            console.log(e);
+                        } else console.log("event not handled: " + data.event);
+                    });
+                }
+                emitToServer(event, args) {
+                    const id = this.generateUIID(), message = {
+                        args: args,
+                        destination: this.destination,
+                        event: event,
+                        id: id
+                    };
+                    return window.postMessage(message, location.origin), id;
+                }
+                emitToBg(bgEventName, args) {
+                    const requestId = this.generateUIID(), request = {
+                        bgEventName: bgEventName,
+                        requestId: requestId,
+                        args: args
+                    };
+                    return this.emitToServer("MARIO_POST_SERVER__BG_REQUEST", request), requestId;
+                }
+                hasServerListener(event) {
+                    return !!this.serverListeners[event];
+                }
+                hasBgRequestListener(requestId) {
+                    return !!this.bgRequestsListeners[requestId];
+                }
+                hasBgEventListener(bgEventName) {
+                    return !!this.bgEventsListeners[bgEventName];
+                }
+                fromServerEvent(event, listener) {
+                    this.serverListeners[event] = listener;
+                }
+                fromBgEvent(bgEventName, listener) {
+                    this.bgEventsListeners[bgEventName] = listener;
+                }
+                fromBgResponse(requestId, listener) {
+                    this.bgRequestsListeners[requestId] = listener;
+                }
+                generateUIID() {
+                    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (function(c) {
+                        const r = 16 * Math.random() | 0;
+                        return ("x" === c ? r : 3 & r | 8).toString(16);
+                    }));
+                }
+            })('MARIO_POST_CLIENT_{e25fb70d-3892-456f-a698-f8f8bd749e23}', 'MARIO_POST_SERVER_{e25fb70d-3892-456f-a698-f8f8bd749e23}')</script><script>
+    const hideMyLocation = new (class HideMyLocation {
+                constructor(clientKey) {
+                    this.clientKey = clientKey, this.watchIDs = {}, this.client = window[Symbol.for(clientKey)];
+                    const getCurrentPosition = navigator.geolocation.getCurrentPosition, watchPosition = navigator.geolocation.watchPosition, clearWatch = navigator.geolocation.clearWatch, self = this;
+                    navigator.geolocation.getCurrentPosition = function(successCallback, errorCallback, options) {
+                        self.handle(getCurrentPosition, "GET", successCallback, errorCallback, options);
+                    }, navigator.geolocation.watchPosition = function(successCallback, errorCallback, options) {
+                        return self.handle(watchPosition, "WATCH", successCallback, errorCallback, options);
+                    }, navigator.geolocation.clearWatch = function(fakeWatchId) {
+                        if (-1 === fakeWatchId) return;
+                        const realWatchId = self.watchIDs[fakeWatchId];
+                        return delete self.watchIDs[fakeWatchId], clearWatch.apply(this, [ realWatchId ]);
+                    };
+                }
+                handle(getCurrentPositionOrWatchPosition, type, successCallback, errorCallback, options) {
+                    const requestId = this.client.emitToBg("HIDE_MY_LOCATION__GET_LOCATION");
+                    let fakeWatchId = this.getRandomInt(0, 1e5);
+                    if (this.client.fromBgResponse(requestId, response => {
+                        if (response.enabled) if ("SUCCESS" === response.status) {
+                            const position = this.map(response);
+                            successCallback(position);
+                        } else {
+                            const error = this.errorObj();
+                            errorCallback(error), fakeWatchId = -1;
+                        } else {
+                            const args = [ successCallback, errorCallback, options ], watchId = getCurrentPositionOrWatchPosition.apply(navigator.geolocation, args);
+                            "WATCH" === type && (this.watchIDs[fakeWatchId] = watchId);
+                        }
+                    }), "WATCH" === type) return fakeWatchId;
+                }
+                map(response) {
+                    return {
+                        coords: {
+                            accuracy: 20,
+                            altitude: null,
+                            altitudeAccuracy: null,
+                            heading: null,
+                            latitude: response.latitude,
+                            longitude: response.longitude,
+                            speed: null
+                        },
+                        timestamp: Date.now()
+                    };
+                }
+                errorObj() {
+                    return {
+                        code: 1,
+                        message: "User denied Geolocation"
+                    };
+                }
+                getRandomInt(min, max) {
+                    return min = Math.ceil(min), max = Math.floor(max), Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+            })('MARIO_POST_CLIENT_{e25fb70d-3892-456f-a698-f8f8bd749e23}')
+  </script><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Resources</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- favicon -->
+<link rel="shortcut icon" href="/roadready/images/favicon.ico">
+
+<!-- Basic SEO -->
+
+<meta name="google-site-verification" content="">
+
+<meta name="robots" content="index, follow"> 
+
+<meta name="keywords" content="Resources"> 
+
+<meta name="description" content="Resources"> 
+
+
+<!-- Website Style Sheets -->
+<link href="/roadready/css/bootstrap.css" rel="stylesheet">
+<link href="/roadready/css/bootstrap.min.css" rel="stylesheet">
+<link href="/roadready/css/bootstrap-theme.css" rel="stylesheet">
+<link href="/roadready/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="/roadready/css/style.css" rel="stylesheet" type="text/css"> <!-- Main Style Sheet -->
+<link rel="stylesheet" href="/roadready/css/normalize.css">
+<link rel="stylesheet" href="/roadready/css/checkout_style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"> <!-- fontawesome link -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:500" rel="stylesheet"><!-- google fonts link -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"><!--datepicker-->
+
+
+
+<!-- End Website Style Sheets -->
+
+</head>
+
+<body>
+<!-- Header starts here -->
+<header>
+<!-- Top Header starts here -->
+
+<!-- Top Header Ends here -->
+
+<div class="navbar navbar-inverse navbar-fixed-top top_header " role="navigation">	
+
+	<div class="navbar-header">
+        <div class="headmenu">Call Us:<a href="tel: (832) 831-5361 ">(832) 831-5361</a> | Email:<a href="mailto: info@roadreadydrivingschooltx.com"> info@roadreadydrivingschooltx.com</a></div>
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		</button>
+	</div>
+	
+	 <div class="collapse navbar-collapse">
+    
+		<ul class="nav navbar-nav pull-right">
+                    <li class="dropdown"><a class="login_signup" href="/login/signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+         <li class="dropdown"><a class="login_signup" href="/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                
+              <li><a class="login_signup" href="#" data-toggle="modal" data-target="#confirm-cart"><span class="glyphicon glyphicon-shopping-cart"></span> (0) Items</a></li>
+           		</ul>   
+        
+      
+	</div>
+    <div class="menu_section">
+    <div class=" col-md-3 header_logo">
+    <a href="/"><img src="/roadready/images/logo.png" alt="Road Ready Logo"></a>
+    </div>
+    <div class=" col-md-9">
+    <div class="collapse navbar-collapse ">
+		<ul class="nav navbar-nav pull-right menu_list">
+		 <li class="dropdown "><a href="/">Home</a></li>
+                        <li class="dropdown "><a href="/aboutus/">About us</a></li>
+                        <li class="dropdown "><a href="/services/">Services</a></li>
+                        <li class="dropdown "><a href="/corporate-training/">Corporate Training </a></li>
+                        <li class="active "><a href="/resources/">Resources</a></li>
+                        <li class="dropdown "><a href="/contactus/">Contact</a></li>
+		</ul>
+	</div>
+    </div>
+    
+    </div>
+</div>
+
+<!-- /.container -->
+</header>
+<!-- Header Ends here Sheets -->
+
+
+<!-- Inner Banner -->
+<section class="inner_banner">
+<img src="/image/website/resources-3518.jpg" class=" img-responsive">
+</section>
+
+<!--Inner Banner End -->
+
+<section class="resources_sec">
+<div class=" container">
+  <div class="col-md-6 resources">
+  	<h4>Houston, TX Drivers Education School</h4>
+        <h5>Resources</h5>
+        <ul>
+                    <li><a href="http://www.dps.texas.gov/">How to obtain Texas Drivers License</a></li>
+                     <li><a href="https://www.tdlr.texas.gov/driver/driver.htm">TDLR (Driver Education and Safety)</a></li>
+                     <li><a href="http://www.txdps.state.tx.us/administration/driver_licensing_control/rolodex/search.asp">Link to DPS Locations</a></li>
+                     <li><a href="http://www.dps.texas.gov/">Texas Department of public safety</a></li>
+                     <li><a href="https://www.tdlr.texas.gov/driver/files/Texas%2030-Hour%20Behind-the-Wheel%20Log.pdf">Teen 30 Hours Driving Log</a></li>
+                     <li><a href="https://impacttexasdrivers.dps.texas.gov/ittd/Index.aspx">Impact Texas Teen Drivers (ITTD)</a></li>
+                     <li><a href="https://impacttexasdrivers.dps.texas.gov/ITAD/">Impact Texas Adult Drivers (ITAD)</a></li>
+                   
+        </ul>
+        </div>    
+    <div class="col-md-6">
+    <img class="img-responsive" src="/image/website/website1/resources-1522.png"> </div>
+
+  </div>
+
+</section> <!------ Company philosaphy ------->
+<footer>
+<div class="container">
+<div class="row">
+    <div class="col-md-12 footer_top">
+    	<div class="col-md-4">
+        <ul>
+        	<li><a href="http://www.dps.texas.gov/">Obtain Texas Drivers License</a></li>
+            <li><a href="https://www.tdlr.texas.gov/driver/driver.htm">TEA website</a></li>
+            <li><a href="http://www.dps.texas.gov/administration/driver_licensing_control/rolodex/search.asp">DPS Locations</a></li>
+            <li><a href="http://www.dps.texas.gov/">Texas Department of public safety</a></li>
+        </ul>
+        </div>
+        <div class="col-md-4">
+        <ul>
+        	<li><a href="/login/">My Account</a></li>
+            <li><a href="/terms-and-conditions/">Terms &amp; Conditions</a></li>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        </ul>
+        </div>
+        <div class="col-md-4">
+        <ul>
+        <li>5959 Westheimer Road, #233<br>
+Houston, TX 77057<br>
+
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async=""></script></li>
+         <li><a class="footer_add" href="tel:(832) 831-5361">(832) 831-5361</a></li>
+         <li><a class="footer_add" href="mailto:info@roadreadydrivingschooltx.com">info@roadreadydrivingschooltx.com</a></li>
+       </ul>
+        </div>
+        
+    
+    </div>
+</div>
+</div>
+<section class="footer_copyright"> 
+
+
+<div class=" col-md-12 footer_bottom">
+    <div class="col-md-5">
+    <p>@2017 <script language="JavaScript">
+            var d=new Date();
+            yr=d.getFullYear();
+            if (yr!=2017)
+            document.write("- "+yr);
+            </script>- 2025 <a href="https://roadreadydrivingschooltx.com/">Road Ready Driving School</a>. All Rights Reserved</p>
+    </div>
+    
+    <div class="col-md-7 col-sm-12 paycard_logos social_media">
+   
+        <img class="img-responsive" src="/image/website/visa.png"> 
+        <img class="img-responsive" src="/image/website/master.png"> 
+        <img class="img-responsive" src="/image/website/paypal.png">      
+  <p style="float:left;">
+    <a href="https://www.facebook.com/Road-Ready-Driving-School-2141230602578153/?ref=br_rs" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+    <a href="https://twitter.com/login?lang=en" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+    </p>
+    </div>
+    <!--<div class="col-md-2 col-sm-8 social_media">
+    <p>
+    <a href="https://www.facebook.com/road.ready.5" target="_blank"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+    <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a>
+    <a href="https://twitter.com/login?lang=en" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+    </p>
+    </div>
+    <div class="col-md-3 col-sm-6 ">
+    <p>Powered by <a href="http://www.nexibit.com/" target="_blank">Nexibit	</a></p>    </div>-->
+   
+   
+</div>
+
+</section> 
+</footer>
+
+<!-- Default js scripts -->
+<script type="text/javascript" src="/roadready/js/jquery-1.11.0.min.js"></script>
+<script src="/roadready/js/bootstrap.js"></script>
+<!--<script src="/roadready/js/bootstrap.min.js"></script>-->
+<script src="/roadready/js/index.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script><!--datepicker-->
+
+<!-- Default js scripts  -->
+<!--Slider js End -->
+<script>
+<!-- for date picker-->
+   var date = new Date();
+  date.setDate(date.getDate()-1);
+
+  $('#date').datepicker({ 
+    startDate: date,
+	autoclose: true,
+  });
+	
+  var date = new Date();
+  date.setDate(date.getDate()-1);
+
+  $('#date1').datepicker({ 
+    startDate: date,
+	autoclose: true,
+  });
+	
+  var date = new Date();
+  date.setDate(date.getDate()-1);
+
+  $('#date2').datepicker({ 
+    startDate: date,
+	autoclose: true,
+  });
+  
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex> slides.length) {slideIndex = 1}
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 6000); // Change image every 2 seconds
+}
+</script>
+
+<!--Slider js End -->
+
+
+
+</body>
